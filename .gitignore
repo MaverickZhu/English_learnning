@@ -1,0 +1,16 @@
+.env
+infra/.env
+backend/.env
+**/.env
+
+__pycache__/
+**/__pycache__/
+*.pyc
+
+node_modules/
+dist/
+build/
+.cache/
+
+data/
+.DS_Store

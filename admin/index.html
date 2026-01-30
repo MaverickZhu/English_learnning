@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>English Learning · Admin</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="admin">
+      <header class="admin-top">
+        <div class="admin-brand">
+          <span>EL</span>
+          <div>
+            <strong>Content Admin</strong>
+            <small>课程与题库管理</small>
+          </div>
+        </div>
+        <div class="admin-actions">
+          <input id="admin-token" type="password" placeholder="X-Admin-Token" />
+          <button class="primary" id="save-token">保存 Token</button>
+        </div>
+      </header>
+
+      <div class="admin-body">
+        <aside class="admin-nav">
+          <button class="nav-item is-active" data-view="dashboard">概览</button>
+          <button class="nav-item" data-view="content">内容管理</button>
+          <button class="nav-item" data-view="import">批量导入</button>
+          <button class="nav-item" data-view="exam">考试配置</button>
+          <button class="nav-item" data-view="jobs">导入任务</button>
+          <button class="nav-item" data-view="audit">审计日志</button>
+        </aside>
+
+        <main class="admin-main">
+          <section class="panel is-visible" data-view="dashboard">
+            <h2>概览</h2>
+            <div class="grid">
+              <div class="card">内容条目<br /><strong>—</strong></div>
+              <div class="card">导入任务<br /><strong>—</strong></div>
+              <div class="card">今日审计<br /><strong>—</strong></div>
+            </div>
+          </section>
+
+          <section class="panel" data-view="content">
+            <h2>内容管理</h2>
+            <div class="toolbar">
+              <select id="content-type">
+                <option value="words">单词</option>
+                <option value="sentences">句子</option>
+                <option value="passages">文章</option>
+                <option value="exercises">练习</option>
+              </select>
+              <input id="content-keyword" placeholder="关键字" />
+              <button class="primary" id="search-content">搜索</button>
+            </div>
+            <div id="content-list" class="list"></div>
+          </section>
+
+          <section class="panel" data-view="import">
+            <h2>批量导入</h2>
+            <div class="toolbar">
+              <select id="import-entity">
+                <option value="word">单词</option>
+                <option value="sentence">句子</option>
+                <option value="passage">文章</option>
+                <option value="exercise">练习</option>
+              </select>
+              <select id="import-mode">
+                <option value="upsert">upsert</option>
+                <option value="insert_only">insert_only</option>
+                <option value="update_only">update_only</option>
+              </select>
+              <button class="ghost" id="get-template">获取模板</button>
+            </div>
+            <textarea id="import-json" placeholder='{"items": []}' rows="8"></textarea>
+            <div class="toolbar">
+              <button class="primary" id="validate-import">校验</button>
+              <button class="primary" id="execute-import">执行导入</button>
+            </div>
+            <pre id="import-result"></pre>
+          </section>
+
+          <section class="panel" data-view="exam">
+            <h2>考试配置</h2>
+            <div class="toolbar">
+              <input id="exam-name" placeholder="配置名称" />
+              <input id="exam-duration" type="number" value="30" />
+              <input id="exam-level" placeholder="A2" />
+            </div>
+            <textarea id="exam-distribution" rows="6" placeholder='{"cloze":8,"image_choice":4,"listening_choice":4,"sentence_order":4}'></textarea>
+            <button class="primary" id="save-exam-config">保存配置</button>
+            <pre id="exam-config-result"></pre>
+          </section>
+
+          <section class="panel" data-view="jobs">
+            <h2>导入任务</h2>
+            <div class="toolbar">
+              <select id="job-status">
+                <option value="">全部</option>
+                <option value="queued">queued</option>
+                <option value="running">running</option>
+                <option value="success">success</option>
+                <option value="failed">failed</option>
+              </select>
+              <button class="primary" id="load-jobs">刷新</button>
+            </div>
+            <div id="job-list" class="list"></div>
+          </section>
+
+          <section class="panel" data-view="audit">
+            <h2>审计日志</h2>
+            <div class="toolbar">
+              <input id="audit-action" placeholder="action" />
+              <button class="primary" id="load-audit">加载</button>
+            </div>
+            <div id="audit-list" class="list"></div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

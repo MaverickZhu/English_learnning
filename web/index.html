@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>English Learning · Web</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="rail">
+        <div class="brand">
+          <div class="brand-badge">EL</div>
+          <div>
+            <div class="brand-title">English Learning</div>
+            <div class="brand-sub">Web Learning Studio</div>
+          </div>
+        </div>
+        <nav class="nav" id="nav">
+          <button class="nav-item is-active" data-view="home">首页</button>
+          <button class="nav-item" data-view="learn">学习</button>
+          <button class="nav-item" data-view="practice">练习</button>
+          <button class="nav-item" data-view="exam">考试</button>
+          <button class="nav-item" data-view="report">报告</button>
+          <button class="nav-item" data-view="profile">我的</button>
+        </nav>
+        <div class="rail-footer">
+          <div class="rail-note">当前环境：Web 体验版</div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div class="topbar-left">
+            <h1 id="page-title">首页</h1>
+            <p id="page-desc">沉浸式英语学习：语音 + 配图 + 练习 + 测试</p>
+          </div>
+          <div class="topbar-right">
+            <div class="pill">A2 · 今日目标 20</div>
+            <button class="primary" id="quick-start">快速开始</button>
+          </div>
+        </header>
+
+        <section class="view is-visible" data-view="home">
+          <div class="hero">
+            <div>
+              <h2>高效学习路径</h2>
+              <p>每天 20 分钟，专注词义、句意与文章理解，建立长期记忆。</p>
+              <div class="hero-actions">
+                <button class="primary" data-view-link="learn">开始学习</button>
+                <button class="ghost" data-view-link="practice">进入练习</button>
+              </div>
+            </div>
+            <div class="hero-card">
+              <div class="hero-card-title">今日学习进度</div>
+              <div class="progress">
+                <div class="progress-bar" style="width: 62%"></div>
+              </div>
+              <div class="hero-metrics">
+                <div><span>已学</span><strong>12</strong></div>
+                <div><span>练习</span><strong>6</strong></div>
+                <div><span>正确率</span><strong>83%</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-grid">
+            <div class="card">
+              <h3>词汇掌握</h3>
+              <p>掌握度与复习提醒自动生成。</p>
+              <div class="badge">持续更新</div>
+            </div>
+            <div class="card">
+              <h3>配图理解</h3>
+              <p>图片贴合词义与句意，提升语义联想。</p>
+              <div class="badge">语义匹配</div>
+            </div>
+            <div class="card">
+              <h3>考级模拟</h3>
+              <p>题型比例与时间限制可配置。</p>
+              <div class="badge">可配置</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="learn">
+          <div class="section-head">
+            <h2>学习</h2>
+            <div class="control-group">
+              <select id="learn-level">
+                <option value="A1">A1</option>
+                <option value="A2" selected>A2</option>
+                <option value="B1">B1</option>
+                <option value="B2">B2</option>
+              </select>
+              <button class="primary" id="load-lesson">加载今日内容</button>
+              <button class="ghost" id="prev-lesson">上一条</button>
+              <button class="ghost" id="next-lesson">下一条</button>
+            </div>
+          </div>
+
+          <div class="lesson">
+            <div class="lesson-card">
+              <div class="lesson-title" id="word-title">gratitude</div>
+              <div class="lesson-meaning" id="word-meaning">感激；感谢</div>
+              <div class="lesson-example" id="word-example">
+                She expressed gratitude for the support.
+              </div>
+              <div class="lesson-actions">
+                <audio id="word-audio" controls></audio>
+                <button class="ghost" id="save-word">加入复习</button>
+              </div>
+            </div>
+            <div class="lesson-media" id="word-image"></div>
+          </div>
+          <div class="lesson-meta" id="lesson-meta"></div>
+          <div class="news-learning" id="news-learning">
+            <div class="news-learning-head">
+              <h3>新闻内容学习</h3>
+              <button class="ghost" id="reload-news">刷新</button>
+            </div>
+            <div class="news-learning-card">
+              <div class="news-meta">
+                <span class="news-source" id="news-source">来源</span>
+                <a class="news-link" id="news-link" href="#" target="_blank" rel="noreferrer">查看原文</a>
+              </div>
+              <h4 id="news-title">等待加载新闻内容...</h4>
+              <p id="news-summary"></p>
+              <div class="news-passage" id="news-passage"></div>
+            </div>
+            <div class="news-grid">
+              <div class="news-panel">
+                <h4>词汇</h4>
+                <ul id="news-words"></ul>
+              </div>
+              <div class="news-panel">
+                <h4>句子</h4>
+                <ul id="news-sentences"></ul>
+              </div>
+              <div class="news-panel">
+                <h4>练习</h4>
+                <div id="news-exercises"></div>
+              </div>
+            </div>
+            <div class="news-status" id="news-status"></div>
+          </div>
+          <div class="media-tools">
+            <div class="media-tools-title">媒体上传（需管理员 Token）</div>
+            <div class="media-tools-grid">
+              <input type="password" id="admin-token" placeholder="X-Admin-Token" />
+              <button class="ghost" id="save-admin-token">保存 Token</button>
+              <div class="media-upload">
+                <label>上传图片</label>
+                <input type="file" id="upload-image" accept="image/*" />
+              </div>
+              <div class="media-upload">
+                <label>上传音频</label>
+                <input type="file" id="upload-audio" accept="audio/*" />
+              </div>
+            </div>
+            <div class="media-status" id="media-status"></div>
+          </div>
+        </section>
+
+        <section class="view" data-view="practice">
+          <div class="section-head">
+            <h2>练习</h2>
+            <div class="control-group">
+              <select id="practice-type">
+                <option value="image_choice">图片选义</option>
+                <option value="listening_choice">听力辨音</option>
+                <option value="sentence_order">句子排序</option>
+                <option value="cloze">完形填空</option>
+              </select>
+              <button class="primary" id="generate-practice">生成练习</button>
+            </div>
+          </div>
+
+          <div class="practice-card" id="practice-card">
+            <div class="practice-prompt" id="practice-prompt">点击生成练习</div>
+            <div class="practice-options" id="practice-options"></div>
+            <div class="practice-actions">
+              <button class="ghost" id="practice-check">提交</button>
+              <div class="practice-result" id="practice-result"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="exam">
+          <div class="section-head">
+            <h2>考级模拟</h2>
+            <div class="control-group">
+              <input type="text" id="exam-title" placeholder="模拟考试名称" value="A2 模拟考试" />
+              <button class="primary" id="generate-exam">生成试卷</button>
+            </div>
+          </div>
+          <div class="exam-card" id="exam-card">
+            <div class="exam-info">尚未生成试卷</div>
+          </div>
+          <div class="exam-questions" id="exam-questions"></div>
+          <div class="exam-actions">
+            <button class="primary" id="submit-exam">提交考试</button>
+            <div class="exam-result" id="exam-result"></div>
+          </div>
+        </section>
+
+        <section class="view" data-view="report">
+          <div class="section-head">
+            <h2>学习报告</h2>
+            <div class="control-group">
+              <button class="primary" id="refresh-report">刷新报告</button>
+            </div>
+          </div>
+          <div class="report-grid">
+            <div class="report-card">
+              <h3>学习概览</h3>
+              <div id="report-summary"></div>
+            </div>
+            <div class="report-card">
+              <h3>建议</h3>
+              <ul id="report-suggestions"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="profile">
+          <div class="section-head">
+            <h2>我的</h2>
+          </div>
+          <div class="profile-card">
+            <div class="profile-row">
+              <label>用户ID</label>
+              <input type="number" id="user-id" placeholder="例如 1" />
+            </div>
+            <div class="profile-row">
+              <label>Email</label>
+              <input type="email" id="user-email" placeholder="you@example.com" />
+            </div>
+            <div class="profile-row">
+              <label>密码</label>
+              <input type="password" id="user-password" placeholder="至少 8 位" />
+            </div>
+            <div class="profile-row">
+              <label>学习目标</label>
+              <input type="number" value="20" />
+            </div>
+            <div class="profile-actions">
+              <button class="ghost" id="register-btn">注册</button>
+              <button class="primary" id="login-btn">登录</button>
+              <button class="ghost" id="save-profile">保存设置</button>
+            </div>
+            <div class="profile-status" id="profile-status"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
